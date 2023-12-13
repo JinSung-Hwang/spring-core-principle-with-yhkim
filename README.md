@@ -1,1 +1,1 @@
-# spring-core-with-yhkim
+# spring-core-principle-with-yhkim
