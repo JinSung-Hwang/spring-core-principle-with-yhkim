@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
 public class AppConfig {
   @Bean
   public MemberService memberService() { // note: 메서드명과 리턴타입이 역할(배역)을 담당한다.
-    return new MemberServiceImpl(memberRepository()); // note: 내부 로직이 구현을 담당한다.
+    return new MemberServiceImpl(memberRepository()); // note: 내부 로직이 구현을 담당한다. // note: 메서드의 리턴타임이 MemberService인데 실제 리턴타입은 MemberServiceImpl이다. 이렇게 작성해도 상관없으며 실제로 빈등록될떄는 MemberServiceImpl로 치환되어서 등록된다.
   }
 
   @Bean
