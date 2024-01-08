@@ -9,11 +9,17 @@ import hello.core.member.MemberServiceImpl;
 import hello.core.member.MemoryMemberRepository;
 import hello.core.order.OrderService;
 import hello.core.order.OrderServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+@Configuration // note: @Configuration 애노테이션을 안붙이면 ConfigurationSingletonTest.java에 설명되어있는 것처럼 CGLIB 기술로 자식 객체가 생성되지 않는다.
+// note: 하여 아래 사용된 @Bean으로 생성되는 객체들이 빈으로 등록이 되고 생성이 되지만 싱글톤을 보장하지는 않는다.
 public class AppConfig {
+
+//  @Autowired
+//  MemberRepository memberRepository;
+
   @Bean
   public MemberService memberService() { // note: 메서드명과 리턴타입이 역할(배역)을 담당한다.
     System.out.println("call AppConfig.memberService");
