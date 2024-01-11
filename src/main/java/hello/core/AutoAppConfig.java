@@ -1,5 +1,8 @@
 package hello.core;
 
+import hello.core.member.MemberRepository;
+import hello.core.member.MemoryMemberRepository;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
@@ -13,4 +16,11 @@ import org.springframework.context.annotation.FilterType;
     // note: 메타애노테이션으로 되어있다고 자바에서 연동을 해주는것이 아니라 스프링부트에서 연동해주는것이다.
     excludeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = Configuration.class)
 )
-public class AutoAppConfig {}
+public class AutoAppConfig {
+
+  @Bean(name = "memoryMemberRepository")
+  MemberRepository memberRepository() {
+    return new MemoryMemberRepository();
+  }
+
+}
