@@ -33,7 +33,7 @@ public class OrderServiceImpl implements OrderService {
   }
 
   // note: 수정자 주입에도 @Autowired를 붙이면 자동으로 주입한다.
-  @Autowired(required = false) // note: required false로 설정하면 주입을 선택적으로 할 수 있다.
+  @Autowired(required = false) // note: required false로 설정하면 주입을 선택적으로 할 수 있다. 자동 주입할 객체가 없으면 메서드가 호출되지 않는다.
   public void setMemberRepository(MemberRepository memberRepository) {
     // note: 수정자 주입은 OrderServiceImple이 생성되고 setter를 호출해서 주입이 일어난다.
     this.memberRepository = memberRepository; // note: 수정자 주입을하려면 MemberRepository에 final을 빼야한다.

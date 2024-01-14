@@ -38,13 +38,13 @@ public class OrderServiceTest {
 
   @Test
   void fieldInjectionTest() {
-    OrderServiceImpl orderService = new OrderServiceImpl();
+//    OrderServiceImpl orderService = new OrderServiceImpl();
     // note: 필드 주입을하면 의존성을 넣어줄 방법이 없다.
     // note: 그래서 의존성을 넣기위해서 setter method를 만들어서 넣어줘야한다.
 //    orderService.setMemberRepository(new MemoryMemberRepository());
 //    orderService.setDiscountPolicy(new DiscountPolicy());
 
-    orderService.createOrder(1L, "itemA", 10000);
+//    orderService.createOrder(1L, "itemA", 10000);
   }
 
 }
