@@ -4,11 +4,13 @@ import hello.core.discount.DiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
 import java.util.Dictionary;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 //@Component("service")
 @Component
+@RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
   // note: @Autowired 로 주입할 수 있는것은 스프링에 등록된 bean객체만 사용가능하다. 일반 객체는 @Autowired로 주입이 불가능하다.
 
@@ -18,19 +20,17 @@ public class OrderServiceImpl implements OrderService {
   // note: 2. 테스트코드 작성할때 간편하게 사용하기 위해서 사용한다.
   // note: 그 이외에 필드 주입은 사용하지 않도록 권장된다. 왜냐하면 테스트할때 다른 객체로 대체하려고해도 다른 객체로 대체하기 힘들다.
   // note: 필드 주입은 생성자 또는 Setter를 통해서 주입할 수 없기 때문에 테스트시 다른 객체로 바꾸어서 테스트하기 힘들다.
-  @Autowired
   private final MemberRepository memberRepository;
-  @Autowired
   private final DiscountPolicy discountPolicy;
 //  private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
 //  private final DiscountPolicy discountPolicy = new RateDiscountPolicy();
 
-  @Autowired // note: 생성자가 하나만 있으면 @Autowired를 안달아도 스프링부트에서 자동으로 주입해준다. 즉, OrderServiceImpl은 생성자가 하나이기때문에 @Autowired를 생략해도 되긴한다. 하지만 명시적인게 더 좋다.
-  public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-    // note: 생성자 주입은 OrderServiceImpl객체가 생성될때 생성자 주입이 일어난다.
-    this.memberRepository = memberRepository;
-    this.discountPolicy = discountPolicy;
-  }
+//  @Autowired // note: 생성자가 하나만 있으면 @Autowired를 안달아도 스프링부트에서 자동으로 주입해준다. 즉, OrderServiceImpl은 생성자가 하나이기때문에 @Autowired를 생략해도 되긴한다. 하지만 명시적인게 더 좋다.
+//  public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+//    // note: 생성자 주입은 OrderServiceImpl객체가 생성될때 생성자 주입이 일어난다.
+//    this.memberRepository = memberRepository;
+//    this.discountPolicy = discountPolicy;
+//  }
 
   // note: 수정자 주입에도 @Autowired를 붙이면 자동으로 주입한다.
 //  @Autowired(required = false) // note: required false로 설정하면 주입을 선택적으로 할 수 있다. 자동 주입할 객체가 없으면 메서드가 호출되지 않는다.
