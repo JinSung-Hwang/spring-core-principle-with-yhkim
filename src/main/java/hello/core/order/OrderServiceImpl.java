@@ -6,11 +6,12 @@ import hello.core.member.MemberRepository;
 import java.util.Dictionary;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 //@Component("service")
 @Component
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
   // note: @Autowired 로 주입할 수 있는것은 스프링에 등록된 bean객체만 사용가능하다. 일반 객체는 @Autowired로 주입이 불가능하다.
 
@@ -25,12 +26,12 @@ public class OrderServiceImpl implements OrderService {
 //  private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
 //  private final DiscountPolicy discountPolicy = new RateDiscountPolicy();
 
-//  @Autowired // note: 생성자가 하나만 있으면 @Autowired를 안달아도 스프링부트에서 자동으로 주입해준다. 즉, OrderServiceImpl은 생성자가 하나이기때문에 @Autowired를 생략해도 되긴한다. 하지만 명시적인게 더 좋다.
-//  public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-//    // note: 생성자 주입은 OrderServiceImpl객체가 생성될때 생성자 주입이 일어난다.
-//    this.memberRepository = memberRepository;
-//    this.discountPolicy = discountPolicy;
-//  }
+  @Autowired // note: 생성자가 하나만 있으면 @Autowired를 안달아도 스프링부트에서 자동으로 주입해준다. 즉, OrderServiceImpl은 생성자가 하나이기때문에 @Autowired를 생략해도 되긴한다. 하지만 명시적인게 더 좋다.
+  public OrderServiceImpl(MemberRepository memberRepository, @Qualifier("mainDiscountPolicy") DiscountPolicy discountPolicy) {
+    // note: 생성자 주입은 OrderServiceImpl객체가 생성될때 생성자 주입이 일어난다.
+    this.memberRepository = memberRepository;
+    this.discountPolicy = discountPolicy;
+  }
 
   // note: 수정자 주입에도 @Autowired를 붙이면 자동으로 주입한다.
 //  @Autowired(required = false) // note: required false로 설정하면 주입을 선택적으로 할 수 있다. 자동 주입할 객체가 없으면 메서드가 호출되지 않는다.
