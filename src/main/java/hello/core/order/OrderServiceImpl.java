@@ -1,5 +1,6 @@
 package hello.core.order;
 
+import hello.core.annotation.MainDiscountPolicy;
 import hello.core.discount.DiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
@@ -27,7 +28,8 @@ public class OrderServiceImpl implements OrderService {
 //  private final DiscountPolicy discountPolicy = new RateDiscountPolicy();
 
   @Autowired // note: 생성자가 하나만 있으면 @Autowired를 안달아도 스프링부트에서 자동으로 주입해준다. 즉, OrderServiceImpl은 생성자가 하나이기때문에 @Autowired를 생략해도 되긴한다. 하지만 명시적인게 더 좋다.
-  public OrderServiceImpl(MemberRepository memberRepository, @Qualifier("mainDiscountPolicy") DiscountPolicy discountPolicy) {
+//  public OrderServiceImpl(MemberRepository memberRepository, @Qualifier("mainDiscountPolicy") DiscountPolicy discountPolicy) {
+  public OrderServiceImpl(MemberRepository memberRepository, @MainDiscountPolicy DiscountPolicy discountPolicy) { // note: 위 코드의 @Qualifier("mainDiscountPolicy")와 @MainDiscountPolicy는 동일하게 동작한다.
     // note: 생성자 주입은 OrderServiceImpl객체가 생성될때 생성자 주입이 일어난다.
     this.memberRepository = memberRepository;
     this.discountPolicy = discountPolicy;
