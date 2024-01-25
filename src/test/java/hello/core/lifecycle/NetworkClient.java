@@ -1,5 +1,7 @@
 package hello.core.lifecycle;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 
@@ -48,13 +50,17 @@ public class NetworkClient {
 //  }
 
 
-  // note: version2 빈 생성과 소멸 관리
+  // note: version2 빈 생성과 소멸 관리 메서드 등록
+  @PostConstruct // note: version3: @PostConstruct 애노테이션을 활용하여 빈 생명주기 관리
   public void init() throws Exception { // note: 의존 관계 주입이 끝나면 호출된다.
     System.out.println("NetworkClient.afterPropertiesSet");
     connect();
     call("초기화 연결 메시지");
   }
 
+  @PreDestroy // note: version3: @PreDestory 애노테이션을 활용하여 빈 생명주기 관리
+  // note: version3은 간단하게 애노테이션으로 빈 생명주기에 메서드를 호출 할 수 있다.
+  // note: 스프링은 권장하는 방식이고 간편하다. 빈 생명주기에 특정 메서드를 실행시키고 싶으면 version3인 @PostConstruct, @PreDestory 애노테이션을 사용하면된다.
   public void close() throws Exception { // note: 빈이 종료될 때 호출된다.
     System.out.println("NetworkClient.destroy");
     disconnect();
